@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Page</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+            crossorigin="anonymous"
+    />
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">На-урок</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/test/create">Create a test</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Join to test</a>
+            </li>
+
+        </ul>
+    </div>
+    <a href="/auth/login" type="button" class="btn btn-primary" style="margin-right: 8px" data-toggle="modal" data-target="#signInModal">
+        Log in
+    </a>
+    <a href="/auth/register" type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+        Register
+    </a>
+</nav>
+
+<div class="container mt-5">
+    <h1>Interesting Courses in JavaScript</h1>
+    <div class="card" style="width: 18rem;">
+        <img src="https://via.placeholder.com/150" class="card-img-top" alt="..." />
+        <div class="card-body">
+            <h5 class="card-title">JavaScript for Beginners</h5>
+            <p class="card-text">
+                Learn the basics of JavaScript and start building your own web applications.
+            </p>
+            <a href="#" class="btn btn-primary">Join now</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="https://via.placeholder.com/150" class="card-img-top" alt="..." />
+        <div class="card-body">
+            <h5 class="card-title">Advanced JavaScript</h5>
+            <p class="card-text">
+                Take your JavaScript skills to the next level and learn advanced concepts like closures, promises, and async/await.
+            </p>
+            <a href="#" class="btn btn-primary">Join now</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <title>Test Form</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            padding: 20px;-->
+<!--        }-->
+<!--        .question {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+<!--        .question h3 {-->
+<!--            margin-top: 0;-->
+<!--        }-->
+<!--        .answer {-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+<!--        .answer input[type="text"] {-->
+<!--            width: 300px;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Create Test</h1>-->
+<!--<form id="testForm">-->
+<!--    <div>-->
+<!--        <label for="testName">Test Name:</label>-->
+<!--        <input type="text" id="testName" name="testName" required>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="testDescription">Test Description:</label>-->
+<!--        <textarea id="testDescription" name="testDescription" required></textarea>-->
+<!--    </div>-->
+<!--    <div id="questionsContainer">-->
+<!--        &lt;!&ndash; Questions will be added dynamically here &ndash;&gt;-->
+<!--    </div>-->
+<!--    <button type="button" id="addQuestionBtn">Add Question</button>-->
+<!--    <button type="button" id="submitBtn">Submit</button>-->
+<!--</form>-->
+
+<!--<script>-->
+<!--    let questionCounter = 1;-->
+
+<!--    function addQuestion() {-->
+<!--        const questionsContainer = document.getElementById('questionsContainer');-->
+<!--        const questionDiv = document.createElement('div');-->
+<!--        questionDiv.className = 'question';-->
+
+<!--        const questionLabel = document.createElement('label');-->
+<!--        questionLabel.textContent = `Question ${questionCounter}:`;-->
+<!--        questionDiv.appendChild(questionLabel);-->
+
+<!--        const questionInput = document.createElement('input');-->
+<!--        questionInput.type = 'text';-->
+<!--        questionInput.name = `question${questionCounter}`;-->
+<!--        questionInput.required = true;-->
+<!--        questionDiv.appendChild(questionInput);-->
+
+<!--        const answersContainer = document.createElement('div');-->
+<!--        answersContainer.id = `answers${questionCounter}`;-->
+<!--        questionDiv.appendChild(answersContainer);-->
+
+<!--        const addAnswerButton = document.createElement('button');-->
+<!--        addAnswerButton.type = 'button';-->
+<!--        addAnswerButton.textContent = 'Add Answer';-->
+<!--        addAnswerButton.addEventListener('click', () => addAnswer(questionCounter));-->
+<!--        questionDiv.appendChild(addAnswerButton);-->
+
+<!--        questionsContainer.appendChild(questionDiv);-->
+<!--        questionCounter++;-->
+<!--    }-->
+
+<!--    function addAnswer(questionNumber) {-->
+<!--        const answersContainer = document.getElementById(`answers${questionNumber}`);-->
+<!--        const answerDiv = document.createElement('div');-->
+<!--        answerDiv.className = 'answer';-->
+
+<!--        const answerLabel = document.createElement('label');-->
+<!--        answerLabel.textContent = 'Answer:';-->
+<!--        answerDiv.appendChild(answerLabel);-->
+
+<!--        const answerInput = document.createElement('input');-->
+<!--        answerInput.type = 'text';-->
+<!--        answerInput.name = `answer${questionNumber}[]`;-->
+<!--        answerInput.required = true;-->
+<!--        answerDiv.appendChild(answerInput);-->
+
+<!--        const isCorrectLabel = document.createElement('label');-->
+<!--        isCorrectLabel.textContent = 'Is Correct?';-->
+<!--        answerDiv.appendChild(isCorrectLabel);-->
+
+<!--        const isCorrectInput = document.createElement('input');-->
+<!--        isCorrectInput.type = 'checkbox';-->
+<!--        isCorrectInput.name = `isCorrect${questionNumber}[]`;-->
+<!--        answerDiv.appendChild(isCorrectInput);-->
+
+<!--        answersContainer.appendChild(answerDiv);-->
+<!--    }-->
+
+<!--    function submitForm() {-->
+<!--        const testName = document.getElementById('testName').value;-->
+<!--        const testDescription = document.getElementById('testDescription').value;-->
+<!--        const questions = [];-->
+
+<!--        for (let i = 1; i < questionCounter; i++) {-->
+<!--            const questionInput = document.getElementsByName(`question${i}`)[0];-->
+<!--            const question = questionInput.value;-->
+<!--            const answers = [];-->
+
+<!--            const answerInputs = document.getElementsByName(`answer${i}[]`);-->
+<!--            const isCorrectInputs = document.getElementsByName(`isCorrect${i}[]`);-->
+
+<!--            for (let j = 0; j < answerInputs.length; j++) {-->
+<!--                const answer = answerInputs[j].value;-->
+<!--                const isCorrect = isCorrectInputs[j].checked;-->
+<!--                answers.push({ answer, isCorrect });-->
+<!--            }-->
+
+<!--            questions.push({ question, answers });-->
+<!--        }-->
+
+<!--        const formData = {-->
+<!--            name: testName,-->
+<!--            description: testDescription,-->
+<!--            questions: questions-->
+<!--        };-->
+
+<!--        console.log(JSON.stringify(formData, null, 2));-->
+<!--        // You can send the formData object to the server using AJAX or submit the form traditionally-->
+<!--    }-->
+
+<!--    const addQuestionBtn = document.getElementById('addQuestionBtn');-->
+<!--    addQuestionBtn.addEventListener('click', addQuestion);-->
+
+<!--    const submitBtn = document.getElementById('submitBtn');-->
+<!--    submitBtn.addEventListener('click', submitForm);-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
