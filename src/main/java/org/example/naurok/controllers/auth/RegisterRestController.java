@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/auth")
-public class RestRegisterController {
+public class RegisterRestController {
     @Autowired
     private UserRepository userRepository;
     @Autowired

@@ -24,7 +24,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/test")
-public class CreateTestController {
+public class CreateTestRestController {
     @Autowired
     private TestRepository testRepository;
     @Autowired
