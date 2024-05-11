@@ -13,7 +13,6 @@ public class CreateTestRequest {
     private String name;
     @NonNull
     private String description;
-    private int numberOfQuestion;
     @NonNull
     private List<CreateTestQuestionsRequest> questions;
 }
