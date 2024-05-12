@@ -1,10 +1,150 @@
+<!-- test.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Details</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .test-details {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .test-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .test-description {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .answer {
+            margin-left: 20px;
+        }
+        .answer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .answer-list li {
+            margin-bottom: 10px;
+        }
+        .answer-list li:before {
+            content: "\2022";
+            font-size: 18px;
+            color: #666;
+            margin-right: 10px;
+        }
+        .submit-button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
 </head>
 <body>
-$END$
+<div class="test-details">
+    <h2 class="test-name" id="test-name"></h2>
+    <p class="test-description" id="test-description"></p>
+    <ul id="questions-list">
+        <!-- questions will be rendered here -->
+    </ul>
+    <button class="submit-button" id="submit-button">Submit Answers</button>
+</div>
+
+<script>
+    const uuid = window.location.pathname.split('/').pop();
+    fetch(`/api/test/get/${uuid}`)
+        .then(response => response.json())
+        .then(data => {
+            const testNameElement = document.getElementById('test-name');
+            const testDescriptionElement = document.getElementById('test-description');
+            const questionsListElement = document.getElementById('questions-list');
+
+            testNameElement.textContent = data.name;
+            testDescriptionElement.textContent = data.description;
+
+            data.questions.forEach(question => {
+                const questionElement = document.createElement('li');
+                questionElement.className = 'question';
+
+                const questionTitleElement = document.createElement('h3');
+                questionTitleElement.className = 'question-title';
+                questionTitleElement.textContent = question.question;
+                questionElement.appendChild(questionTitleElement);
+
+                const answerListElement = document.createElement('ul');
+                answerListElement.className = 'answer-list';
+                question.answers.forEach(answer => {
+                    const answerElement = document.createElement('li');
+                    answerElement.textContent = answer.answer;
+                    const radioInput = document.createElement('input');
+                    radioInput.type = 'radio';
+                    radioInput.name = `answer-${question.numberOfQuestion}`;
+                    radioInput.value = answer.answer;
+                    answerElement.appendChild(radioInput);
+                    answerListElement.appendChild(answerElement);
+                });
+                questionElement.appendChild(answerListElement);
+
+                questionsListElement.appendChild(questionElement);
+            });
+
+            const submitButton = document.getElementById('submit-button');
+            submitButton.addEventListener('click', () => {
+                const userAnswers = {};
+                data.questions.forEach(question => {
+                    const answerInput = document.querySelector(`input[name="answer-${question.numberOfQuestion}"]:checked`);
+                    if (answerInput) {
+                        userAnswers[question.numberOfQuestion] = answerInput.value;
+                    }
+                });
+
+                fetch(`/api/test/check/${uuid}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userAnswers)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        // display the result
+                        const resultElement = document.createElement('p');
+                        resultElement.textContent = `You scored ${data.score} out of ${data.total}`;
+                        document.body.appendChild(resultElement);
+                    })
+                    .catch(error => console.error(error));
+            });
+        })
+        .catch(error => console.error(error));
+</script>
 </body>
 </html>
+

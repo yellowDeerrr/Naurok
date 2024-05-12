@@ -1,4 +1,4 @@
-package org.example.naurok.payload.response.test;
+package org.example.naurok.payload.response.test.get;
 
 import lombok.Getter;
 import lombok.Setter;

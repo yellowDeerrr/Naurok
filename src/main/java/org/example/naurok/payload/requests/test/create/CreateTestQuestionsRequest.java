@@ -1,4 +1,4 @@
-package org.example.naurok.payload.requests.test;
+package org.example.naurok.payload.requests.test.create;
 
 import lombok.Getter;
 import lombok.NonNull;

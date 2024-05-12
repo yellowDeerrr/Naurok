@@ -18,5 +18,5 @@ public class TestAnswers {
     private Long id;
     private String answer;
     private String questionUUID;
-    private boolean isCorrect;
+    private Boolean isCorrect;
 }

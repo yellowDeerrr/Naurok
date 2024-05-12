@@ -1,9 +1,8 @@
-package org.example.naurok.payload.response.test;
+package org.example.naurok.payload.response.test.get;
 
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.example.naurok.payload.requests.test.CreateTestAnswersRequest;
 
 import java.util.List;
 
