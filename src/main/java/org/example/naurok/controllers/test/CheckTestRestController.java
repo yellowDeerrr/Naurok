@@ -1,16 +1,14 @@
 package org.example.naurok.controllers.test;
 
 import org.example.naurok.payload.response.test.check.CheckTestResponse;
-import org.example.naurok.repositories.TestAnswersRepository;
-import org.example.naurok.repositories.TestQuestionsRepository;
-import org.example.naurok.repositories.TestRepository;
+import org.example.naurok.services.students.MarksService;
 import org.example.naurok.services.test.CheckTestService;
 import org.example.naurok.services.test.TestService;
+import org.example.naurok.tables.Marks;
 import org.example.naurok.tables.Test;
-import org.example.naurok.tables.TestAnswers;
-import org.example.naurok.tables.TestQuestions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,13 +22,21 @@ public class CheckTestRestController {
     private TestService testService;
     @Autowired
     private CheckTestService checkTestService;
+    @Autowired
+    private MarksService marksService;
+
     @PostMapping("/{uuid}")
-    public ResponseEntity<CheckTestResponse> checkTest(@PathVariable("uuid") String uuid, @RequestBody Map<String, String> userAnswers) {
+    public ResponseEntity<CheckTestResponse> checkTest(Authentication authentication, @PathVariable("uuid") String uuid, @RequestBody Map<String, String> userAnswers) {
         Test test = testService.isExist(uuid);
-        if (test == null){
+        if (test == null)
             return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(checkTestService.checkTest(uuid, userAnswers));
+        Marks marks = marksService.findUserAnswers(authentication, uuid);
+        if (marks != null)
+            return ResponseEntity.badRequest().build();
+
+        CheckTestResponse response = checkTestService.checkTest(uuid, userAnswers);
+        marksService.saveUserAnswers(authentication, uuid, response.getMark(), response.getCountUserCorrectAnswers(), response.getCountQuestions());
+        return ResponseEntity.ok(response);
     }
 }
 

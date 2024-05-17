@@ -137,7 +137,7 @@
                         console.log(data);
                         // display the result
                         const resultElement = document.createElement('p');
-                        resultElement.textContent = `You scored ${data.score} out of ${data.total}`;
+                        resultElement.textContent = `Your mark is ${data.mark}. Correct answers ${data.countUserCorrectAnswers}/${data.countQuestions}`;
                         document.body.appendChild(resultElement);
                     })
                     .catch(error => console.error(error));

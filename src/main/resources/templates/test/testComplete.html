@@ -1,0 +1,87 @@
+<!-- test.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Details</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .test-details {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .test-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .test-description {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .answer {
+            margin-left: 20px;
+        }
+        .answer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .answer-list li {
+            margin-bottom: 10px;
+        }
+        .answer-list li:before {
+            content: "\2022";
+            font-size: 18px;
+            color: #666;
+            margin-right: 10px;
+        }
+        .submit-button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h2 id="mark"></h2>
+</div>
+
+<script>
+    const uuid = window.location.pathname.split('/').pop();
+    fetch(`/api/test/get/mark/${uuid}`)
+        .then(response => response.json())
+        .then(data => {
+            let mark = document.getElementById('mark');
+            mark.textContent = `Your mark is ${data.mark}. Correct answers ${data.countUserCorrectAnswers}/${data.countQuestions}`;
+        })
+        .catch(error => console.error(error));
+</script>
+</body>
+</html>
+

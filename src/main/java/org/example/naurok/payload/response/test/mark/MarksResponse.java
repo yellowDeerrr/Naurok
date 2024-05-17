@@ -1,11 +1,11 @@
-package org.example.naurok.payload.response.test.check;
+package org.example.naurok.payload.response.test.mark;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CheckTestResponse {
+public class MarksResponse {
     private int mark;
     private int countUserCorrectAnswers;
     private int countQuestions;
