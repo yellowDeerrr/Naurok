@@ -15,4 +15,6 @@ public class RegisterRequest {
     private String secondName;
     @NonNull
     private String password;
+    @NonNull
+    private String isPrivate;
 }

@@ -22,6 +22,7 @@ public class RegisterService {
         String login = registerRequest.getLogin();
         String firstName = registerRequest.getFirstName();
         String secondName = registerRequest.getSecondName();
+        Boolean isPrivate = registerRequest.getIsPrivate().equals("true");
 
         if (userRepository.findByLogin(login) != null){
             return false;
@@ -35,6 +36,7 @@ public class RegisterService {
             userEntity.setSecondName(secondName);
             userEntity.setFirstNameAndLastName(firstName + " " + secondName);
             userEntity.setUUID(UUID.randomUUID().toString());
+            userEntity.setIsPrivate(isPrivate);
             userEntity.setRoles(Collections.singletonList(roleRepository.findByName("ROLE_USER").get()));
 
             userRepository.save(userEntity);

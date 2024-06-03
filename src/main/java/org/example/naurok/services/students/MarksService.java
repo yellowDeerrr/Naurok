@@ -25,6 +25,6 @@ public class MarksService {
 
     public Marks findUserAnswers(Authentication authentication, String testUUID){
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        return marksRepository.findByStudentUUID(userDetails.getUUID());
+        return (Marks) marksRepository.findByStudentUUID(userDetails.getUUID());
     }
 }

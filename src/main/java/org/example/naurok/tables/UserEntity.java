@@ -23,6 +23,7 @@ public class UserEntity {
     private String firstName;
     private String secondName;
     private String firstNameAndLastName;
+    private Boolean isPrivate;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
